@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zin game</title>
+    <style>
+        body {
+            font-family: 'DLaM Display';
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        #form1, #form2 {
+            display: none;
+            text-align: center;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 24px;
+            margin: 15px;
+            cursor: pointer;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            background-size: cover;
+            background-position: center;
+            width: 200px;
+            height: 60px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            font-family: 'Fantasy Copperplate'; /* Updated font */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Text shadow background */
+        }
+        #yesButton {
+            background-image: url('yeeees.jpg');
+        }
+        #noButton {
+            background-image: url('no.jpg');
+        }
+        #backButton {
+            background-image: url('tryagain.jpg'); /* Background for play again button */
+        }
+        #playButton {
+            background-image: url('music.webp'); /* Background image for play button */
+        }
+        @keyframes congratulationAnimation {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .animated-text {
+            animation: congratulationAnimation 0.5s ease-in-out infinite;
+            color: black;
+            text-shadow: 0 0 10px white;
+            font-family: 'DLaM Display';
+            font-size: 3rem;
+            text-transform: uppercase;
+        }
+        .no-move {
+            position: absolute;
+        }
+    </style>
+    <script>
+        function showForm1() {
+            document.getElementById('form2').style.display = 'none';
+            document.getElementById('form1').style.display = 'block';
+            document.body.style.backgroundImage = "url('test22.PNG')";
+        }
+
+        function yesClicked() {
+            document.getElementById('form1').style.display = 'none';
+            document.getElementById('form2').style.display = 'block';
+            document.body.style.backgroundImage = "url('cute.jpg')";
+            let yesAudio = new Audio('ya.mp3'); // Audio file for "Yes" button
+            yesAudio.play(); // Play audio when "Yes" button is clicked
+        }
+
+        function noClicked() {
+            const noButton = document.getElementById('noButton');
+            const maxWidth = window.innerWidth - noButton.offsetWidth;
+            const maxHeight = window.innerHeight - noButton.offsetHeight;
+            const newX = Math.random() * maxWidth;
+            const newY = Math.random() * maxHeight;
+            noButton.style.left = `${newX}px`;
+            noButton.style.top = `${newY}px`;
+            noButton.classList.add('no-move');
+            let noAudio = new Audio('lalala.mp3'); // Audio file for "No" button
+            noAudio.play(); // Play audio when "No" button is clicked
+        }
+
+        function goBack() {
+            let goBackAudio = new Audio('re.mp3'); // Audio file for "Go Back" button
+            goBackAudio.play(); // Play audio when "Go Back" button is clicked
+            setTimeout(function() {
+                location.reload(); // Refresh the page after audio is played
+            }, 1000); // Adjust the delay if needed
+        }
+
+        function playAgain() {
+            let playAudio = new Audio('play-again.mp3'); // Audio file for new button
+            playAudio.play(); // Play audio when new button is clicked
+            setTimeout(function() {
+                window.location.href = 'https://youtu.be/k98LrZ1P3bs?si=mII7xDSvAP3-aLGL&t=7'; // Redirect to YouTube link
+            }, 1000); // Adjust the delay if needed
+        }
+
+        window.onload = function() {
+            document.body.style.backgroundImage = "url('test22.PNG')";
+            document.getElementById('form1').style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <div id="form1">
+        <h1>Are you the prettiest girl ever?</h1>
+        <button id="yesButton" onclick="yesClicked()">Yeees</button>
+        <button id="noButton" onclick="noClicked()">No</button>
+    </div>
+    <div id="form2">
+        <h1 class="animated-text">Congratulations, you won this:💐 </h1>
+        <button id="backButton" onclick="goBack()">Try Again</button>
+        <button id="playButton" onclick="playAgain()">Sad Song</button>
+    </div>
+</body>
+</html>
